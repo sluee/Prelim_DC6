@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//   Route::resource('clients',[ClientController::class]);
+Route::get('/clients' ,[ClientController::class, 'index']);
+Route::get('/clients/search/{searchKey}', [ClientController::class, 'search']);
 require __DIR__.'/auth.php';
