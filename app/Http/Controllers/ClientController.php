@@ -11,26 +11,24 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     return inertia('Client/Index', [
-    //         'clients' => Client::orderBy('first_name', 'asc')->get(),
-    //     ]);
-    // }
-
     public function index() {
         $clients = Client::get();
 
         return inertia('Client/Index', [
-            'clients' => Client::paginate(10)->through(fn($client) =>[
-                'id' => $client->id,
-                'last_name' =>$client->last_name,
-                'first_name' =>$client->first_name,
-                'address' =>$client->address,
-                'level' =>$client->level
-            ])
+            'clients' => Client::paginate(9)->through(function($client) {
+                return [
+                    'id' => $client->id,
+                    'last_name' => $client->last_name,
+                    'first_name' => $client->first_name,
+                    'address' => $client->address,
+                    'level' => $client->level,
+                    'phone' => $client->phone,
+                    'pic' => $client->pic ? $client->pic : 'https://i.pinimg.com/564x/57/10/9e/57109e872f0bf5f732436452cf61db38.jpg',
+                ];
+            })
         ]);
     }
+
 
     public function search($searchKey){
         return inertia('Client/Index', [

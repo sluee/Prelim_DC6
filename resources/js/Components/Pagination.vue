@@ -6,7 +6,7 @@
                 :href="link.url"
                 v-html="link.label"
                 class="px-1"
-                :class="{ 'text-gray-500': ! link.url, 'font-bold text-xl text-blue-900' : link.active}"
+                :class="{ 'text-gray-500': ! link.url, 'font-bold text-xl text-purle-900' : link.active}"
                 />
     </div>
 </template>

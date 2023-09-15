@@ -13,7 +13,7 @@ class Client extends Model
     protected $appends = ['picUrl'];
 
     public function getPicUrlAttribute() {
-        $url = $this->pic ? asset("images/clients_pics/" . $this->pic) : "https://i.pinimg.com/736x/73/e0/5c/73e05c27a6de1ad14a8374289f53f4cb.jpg";
+        $url = $this->pic ? asset("images/clients_pics/" . $this->pic) : "https://i.pinimg.com/564x/57/10/9e/57109e872f0bf5f732436452cf61db38.jpg";
         return $url;
     }
 }

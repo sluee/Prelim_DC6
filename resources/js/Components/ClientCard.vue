@@ -1,7 +1,7 @@
 <template>
     <div class="mx-auto mt-5 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md  hover:shadow-lg ">
         <div class="cursor-pointer " @click="open(client)">
-            <img class="h-48 w-full object-cover object-center"  :src="client.picUrl" />
+            <img class="h-48 w-full object-cover object-center"  src="https://i.pinimg.com/564x/57/10/9e/57109e872f0bf5f732436452cf61db38.jpg" />
         <div class="p-4">
             <div class="flex items-center">
                 <h2 class="mb-2 mr-4 text-lg  dark:text-white text-gray-900"><span class="font-semibold">Name: </span> {{ client.first_name }} {{ client.last_name }}</h2>

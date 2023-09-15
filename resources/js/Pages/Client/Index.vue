@@ -18,7 +18,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-wrap" >
-                <ClientCard v-for="client in props.clients" :client="client" :key="client.id"/>
+                <ClientCard v-for="client in props.clients.data" :client="client" :key="client.id"/>
 
             </div>
             <Pagination :links="clients.links" class="mt-6 flex justify-center"/>

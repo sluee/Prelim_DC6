@@ -37,7 +37,7 @@ function toggleWidth() {
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div id="branding" :class="hidden">
-                <img src="images/logo.png" alt="Logo"
+                <img id="image" src="images/logo.png" alt="Logo"
                     class="w-[120px] h-[120px] mx-auto rounded-full object-cover">
                 <h1 class="text-xl text-center text-gray-200 my-6">DC 6 Prelim</h1>
 
