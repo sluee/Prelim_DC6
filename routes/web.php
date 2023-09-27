@@ -34,9 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //   Route::resource('clients',[ClientController::class]);
+    Route::get('/clients' ,[ClientController::class, 'index']);
+    Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
+    Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/clients/search/{searchKey}', [ClientController::class, 'search']);
 });
 
-//   Route::resource('clients',[ClientController::class]);
-Route::get('/clients' ,[ClientController::class, 'index']);
-Route::get('/clients/search/{searchKey}', [ClientController::class, 'search']);
+
 require __DIR__.'/auth.php';

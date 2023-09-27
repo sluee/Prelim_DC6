@@ -17,6 +17,10 @@
         <i class="fa fa-home"></i> <span v-show="!collapse">Dashboard</span></Link>
     <Link href="/clients">
         <i class="fa-solid fa-users"></i> <span  v-show="!collapse"> Clients</span>  </Link>
+    <Link href="/suppliers">
+        <i class="fa-solid fa-users"></i> <span  v-show="!collapse"> Suppliers</span>  </Link>
+    <Link href="/products">
+        <i class="fa-solid fa-users"></i> <span  v-show="!collapse"> Products</span>  </Link>
 
 </div>
 
