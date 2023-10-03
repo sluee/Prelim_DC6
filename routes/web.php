@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,16 +38,39 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //   Route::resource('clients',[ClientController::class]);
-    Route::get('/clients' ,[ClientController::class, 'index']);
-    Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
-    Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
-    Route::get('/clients/search/{searchKey}', [ClientController::class, 'search']);
+    Route::middleware('can:manage-clients')->group(function(){
+        Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
+      
+        Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
+        Route::get('/clients/search/{searchKey}', [ClientController::class, 'search']);
+        Route::get('/clients/edit/{client}', [ClientController::class, 'edit']);
+        Route::put('/clients/{client}', [ClientController::class, 'update']);
+    });
     Route::get('/clients/{client}', [ClientController::class, 'show']);
-    Route::get('/clients/edit/{client}', [ClientController::class, 'edit']);
-    Route::put('/clients/{client}', [ClientController::class, 'update']);
+    Route::get('/clients' ,[ClientController::class, 'index']);
+   
     // Route::get('/products/edit/{product}',[ProductController::class,'edit']);
 
 
+    Route::middleware('can:manage-products')->group(function(){
+        Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('/products', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/products/search/{searchKey}', [ProductController::class, 'search']);
+        Route::get('/products/edit/{product}', [ProductController::class, 'edit']);
+        Route::put('/products/{product}', [ProductController::class, 'update']);
+    });
+    Route::get('/products' ,[ProductController::class, 'index']);
+    Route::get('/products/{product}', [ProductController::class, 'show']);
+
+    Route::middleware('can:manage-suppliers')->group(function(){
+        Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('supplier.create');
+        Route::post('/suppliers', [SupplierController::class, 'store'])->name('supplier.store');
+        Route::get('/suppliers/search/{searchKey}', [SupplierController::class, 'search']);
+        Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit']);
+        Route::put('/suppliers/{supplier}', [SupplierController::class, 'update']);
+    });
+    Route::get('/suppliers' ,[SupplierController::class, 'index']);
+    Route::get('/suppliers/{supplier}', [SupplierController::class, 'show']);
 });
 
 

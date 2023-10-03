@@ -12,7 +12,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Product/index', [
+            'products' => Product::paginate(9)->through(function($client) {
+                return [
+                    'id' => $client->id,
+                    'name' => $client->name,
+                    'qty' => $client->qty,
+                    'price' => $client->price,
+
+                ];
+            })
+        ]);
     }
 
     /**
@@ -20,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Product/create',[
+            'products' => Product::orderBy('id','asc')->get(),
+        ]);
     }
 
     /**
@@ -28,7 +40,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'name'=>'required',
+            'qty' => 'required',
+            'price' => 'required|numeric'
+        ]);
+
+
+        Product::create($fields);
+
+        return redirect('/products')->with('message', 'Products Added Successfully');
     }
 
     /**
@@ -36,7 +57,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return inertia('Product/show', [
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -44,7 +67,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return inertia('Product/edit', [
+            'products' => $product
+        ]);
     }
 
     /**
@@ -52,7 +77,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $fields = $request->validate([
+            'name'=>'required',
+            'qty' => 'required',
+            'price' => 'required|numeric',
+
+        ]);
+
+
+
+        $product->update($fields);
+
+        return redirect('/products')->with('message', 'Product has been updated successfully!');
     }
 
     /**

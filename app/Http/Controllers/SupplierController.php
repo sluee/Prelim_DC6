@@ -12,7 +12,19 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $supplier = Supplier::get();
+
+        return inertia('Supplier/index', [
+            'suppliers' => Supplier::paginate(9)->through(function($client) {
+                return [
+                    'id' => $client->id,
+                    'name' => $client->name,
+                    'address' => $client->address,
+                    'phone' => $client->phone,
+
+                ];
+            })
+        ]);
     }
 
     /**
@@ -20,7 +32,9 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Supplier/create',[
+            'suppliers' => Supplier::orderBy('name','asc')->get(),
+        ]);
     }
 
     /**
@@ -28,7 +42,16 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'name'=>'required',
+            'address' => 'required',
+            'phone' => 'required|numeric'
+        ]);
+
+
+        Supplier::create($fields);
+
+        return redirect('/suppliers')->with('message', 'Supplier Added Successfully');
     }
 
     /**
@@ -36,7 +59,9 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        //
+        return inertia('Supplier/show', [
+            'supplier' => $supplier,
+        ]);
     }
 
     /**
@@ -44,7 +69,9 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return inertia('Supplier/edit', [
+            'suppliers' => $supplier
+        ]);
     }
 
     /**
@@ -52,7 +79,18 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $fields = $request->validate([
+            'name'=>'required',
+            'address' => 'required',
+            'phone' => 'required|numeric',
+
+        ]);
+
+
+
+        $supplier->update($fields);
+
+        return redirect('/suppliers')->with('message', 'Supplier has been updated successfully!');
     }
 
     /**
