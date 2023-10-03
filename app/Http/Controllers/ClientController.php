@@ -23,7 +23,7 @@ class ClientController extends Controller
                     'address' => $client->address,
                     'level' => $client->level,
                     'phone' => $client->phone,
-                    'pic' => $client->pic ? $client->pic : 'https://i.pinimg.com/564x/57/10/9e/57109e872f0bf5f732436452cf61db38.jpg',
+                    'pic' => $client->pic ,
                 ];
             })
         ]);
@@ -56,6 +56,7 @@ class ClientController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'level' => 'required|numeric',
+            'pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $fileName = null;
@@ -75,25 +76,50 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Client $client)
     {
-        //
+
+        return inertia('Client/Show', [
+            'client' => $client,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Client $client)
     {
-        //
+        return inertia('Client/edit', [
+            'clients' => $client
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Client $client)
     {
-        //
+        $fields = $request->validate([
+            'first_name'=>'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'phone' => 'required|numeric',
+            'level' => 'required|numeric',
+        ]);
+        $fileName = null;
+
+        //process image
+        if($request->pic){
+            $fileName = time().'.'.$request->pic->extension();
+            $request->pic->move(public_path('images/client_pics'), $fileName);
+            $fields['pic'] = $fileName;
+        }
+
+
+        $client->update($fields);
+
+        return redirect('/clients')->with('message', 'Clients has been updated successfully!');
+
     }
 
     /**

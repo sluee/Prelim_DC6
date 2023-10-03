@@ -40,6 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
     Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
     Route::get('/clients/search/{searchKey}', [ClientController::class, 'search']);
+    Route::get('/clients/{client}', [ClientController::class, 'show']);
+    Route::get('/clients/edit/{client}', [ClientController::class, 'edit']);
+    Route::put('/clients/{client}', [ClientController::class, 'update']);
+    // Route::get('/products/edit/{product}',[ProductController::class,'edit']);
+
+
 });
 
 

@@ -32,9 +32,9 @@ const props = defineProps({
 
 })
 
-// function open(client) {
-//     router.visit('/clients/' + client.id)
-// }
+function open(client) {
+    router.visit('/clients/' + client.id)
+}
 
 
 // function toggleEnabled(client){
