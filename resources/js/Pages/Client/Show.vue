@@ -22,14 +22,14 @@
                 <div class="bg-white  shadow-lg sm:rounded-lg">
                     <div class="p-6 text-gray-900 flex">
                         <div class="w-[300px] h-[300px]  border flex justify-center items-center">
-                            <img :src="client.pic" alt="Client photo" class="aspect-square w-[100%] object-cover">
+                            <img :src="client.picUrl" alt="Client photo" class="aspect-square w-[100%] object-cover">
                         </div>
                         <div class="flex-1 ml-4 bg-">
                             <div class="flex">
                                 <h3 class="text-2xl flex-1 ">{{ client.address }}</h3>
                                 <div>
-                                    <Link  class="px-4 py-2 mr-2 mb-2 bg-red-300 shadow border-gray-300 border hover:bg-red-400 rounded" :href="'/clients/' + client.id" method="delete" as="button">Delete</Link>
-                                    <Link class="px-4 py-2 mr-2 mb-2 bg-blue-300 shadow border-gray-300 border hover:bg-blue-400 rounded" :href="'/clients/edit/' + client.id" as="button">Edit</Link>
+                                    <Link v-if="$page.props.auth.permissions.includes('manage-clients')" class="px-4 py-2 mr-2 mb-2 bg-red-300 shadow border-gray-300 border hover:bg-red-400 rounded" :href="'/clients/' + client.id" method="delete" as="button">Delete</Link>
+                                    <Link v-if="$page.props.auth.permissions.includes('manage-clients')" class="px-4 py-2 mr-2 mb-2 bg-blue-300 shadow border-gray-300 border hover:bg-blue-400 rounded" :href="'/clients/edit/' + client.id" as="button">Edit</Link>
                                 </div>
                             </div>
                             <hr>
