@@ -10,9 +10,9 @@ const props = defineProps({
 
 })
 
-function remove(sup) {
-    selectedSupplierForDelete = sup
-    deleteForm.delete('/products' +selectedSupplierForDelete.id)
+function remove(prod) {
+    selectedProductForDelete = prod
+    deleteForm.delete('/products' +selectedProductForDelete.id)
 }
 // function search(ev){
 //     router.visit('/clients/search/'+ ev.target.value);

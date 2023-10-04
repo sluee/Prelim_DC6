@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/clients/edit/{client}', [ClientController::class, 'edit']);
         Route::put('/clients/{client}', [ClientController::class, 'update']);
         Route::get('/clients/{client}', [ClientController::class, 'show']);
+        Route::delete('/clients/{client}', [ClientController::class, 'destroy']);
     });
 
 
@@ -61,8 +62,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/products/edit/{product}', [ProductController::class, 'edit']);
         Route::put('/products/{product}', [ProductController::class, 'update']);
         Route::get('/products/{product}', [ProductController::class, 'show']);
+        Route::delete('/products/{product}', [ProductController::class, 'destroy']);
     });
-
 
 
     Route::middleware('can:manage-suppliers')->group(function(){
@@ -73,6 +74,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit']);
         Route::put('/suppliers/{supplier}', [SupplierController::class, 'update']);
         Route::get('/suppliers/{supplier}', [SupplierController::class, 'show']);
+        Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy']);
     });
 
 

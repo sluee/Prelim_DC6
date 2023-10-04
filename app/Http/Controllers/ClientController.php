@@ -125,8 +125,9 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect('/clients')->with('message', 'Clients has been deleted successfully!');
     }
 }

@@ -32,7 +32,7 @@ const props = defineProps({
                 </div> -->
 
                 <div>
-                    <Link v-if="$page.props.auth.permissions.includes('manage-clients')" class="button1 mb-2 py-2 px-3 bg-blue-300 shadow border-gray-300 border hover:bg-blue-400 rounded mr-3" as="button" href="/clients/create">Create Client</Link>
+                    <Link  class="button1 mb-2 py-2 px-3 bg-blue-300 shadow border-gray-300 border hover:bg-blue-400 rounded mr-3" as="button" href="/clients/create">Create Client</Link>
 
                 </div>
             </div>

@@ -28,8 +28,8 @@
                             <div class="flex">
                                 <h3 class="text-2xl flex-1 ">{{ client.address }}</h3>
                                 <div>
-                                    <Link v-if="$page.props.auth.permissions.includes('manage-clients')" class="px-4 py-2 mr-2 mb-2 bg-red-300 shadow border-gray-300 border hover:bg-red-400 rounded" :href="'/clients/' + client.id" method="delete" as="button">Delete</Link>
-                                    <Link v-if="$page.props.auth.permissions.includes('manage-clients')" class="px-4 py-2 mr-2 mb-2 bg-blue-300 shadow border-gray-300 border hover:bg-blue-400 rounded" :href="'/clients/edit/' + client.id" as="button">Edit</Link>
+                                    <Link  class="px-4 py-2 mr-2 mb-2 bg-red-300 shadow border-gray-300 border hover:bg-red-400 rounded" @click="remove(client.id)" method="delete" as="button">Delete</Link>
+                                    <Link  class="px-4 py-2 mr-2 mb-2 bg-blue-300 shadow border-gray-300 border hover:bg-blue-400 rounded" :href="'/clients/edit/' + client.id" as="button">Edit</Link>
                                 </div>
                             </div>
                             <hr>
@@ -58,5 +58,9 @@ const props = defineProps({
 })
 const page = usePage()
 
+function remove(sup) {
+    selectedClientDelete = sup
+    deleteForm.delete('/clients' +selectedClientDelete.id)
+}
 
 </script>
